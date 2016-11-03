@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Image Bucket</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Image Bucket</title>
 
-  <!-- Bootstrap -->
-  <script src="index.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj"
-    crossorigin="anonymous">
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="styles.css">
-  <script>
+	<!-- Bootstrap -->
+	<script src="index.js"></script>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj"
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="styles.css">
+	<script>
   $(document).ready(function () 
   {
     $("#sendImage").hide();
@@ -28,21 +28,21 @@
 </head>
 
 <body>
-  <div id="header-wrap" class="header">
-    <form id="upload" action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="uploadfile" id="uploadfile" accept="image/gif, image/jpeg, image/png" onchange="readURL(this);" />
-      <input type="hidden" name="token" value="{{.}}" />
-      <input type="submit" id="sendImage" value="upload"/>
-    </form>
-  </div>
-  <div id="container">
-    <img id="image" />
-  </div>
+	<div id="header-wrap" class="header">
+    <!-- Function adapted from: https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/04.5.html -->
+		<form id="upload" action="/" method="POST" enctype="multipart/form-data">
+			<input type="file" name="uploadfile" accept="image/gif, image/jpeg, image/png" onchange="readURL(this);"/>
+      <input id="sendImage" type="submit" value="Get your link!" onclick="showLink" /><br>
+		</form>
+	</div>
+	<div id="container">
+		<img id="image" />
+	</div>
 
-  <form>
-    <input id="sendImage" type="submit" value="Get your link!" onclick="showLink"/><br>
-    <input id="link" type="text" name="link" readonly>
-  </form>
+	<form >
+		<input id="link" type="text" name="link" readonly>
+	</form>
+
 
 </body>
 
