@@ -9,6 +9,11 @@
 ### Introduction
 In summary, this a single Web application that a user can upload an image to be stored and can be retrieve in a later date. The user simply drags and drops the image or can "Choose file" to be uploaded.
 
+## Instructions
+**Step 1:** First of all we need to download and extract GO from the [GO downloads Website](https://golang.org/dl/) clicking on the operating system you are using.
+
+**Step 2:** Right click on "This PC" and navigte to the properties page and click Advanced system settings -> Environmental Variables and paste the location of your path on the path variable.
+
 ### Technologies used
 
 Languages | Libraries | Frameworks | Database
@@ -32,7 +37,7 @@ Download and install mongo depending on you operating system from the [Mongo Web
 In the bin folder there will be a bunch of mongo executables. **MongoD** located in the bin folder is the actual database which is gonna run in the background **mongo** (commandline interface) is the application where you create/insert/update/delete your database.
 open up cmd prompt and navigate to the bin directory
 >C:\Program Files\MongoDB\Server\3.2\bin
->
+
 **dir** to verify all the contents
 
 If its your first time setting up MongoDB and execute **mongod** you will  find that it will tell you that you need a data directory. So, now we need a data directory
@@ -46,11 +51,11 @@ Now run **mongod** and it will show the port 27017 and run **mongo** on another 
 Instead of locating the bin folder to execute the mongo executables everytime you can create a shortcut.
 navigate back to 
 >C:\Program Files\MongoDB\Server\3.2\bin
->
+
 
 right click any file and click properties copy the location:
 >C:\Program Files\MongoDB\Server\3.2\bin
->
+
 so you tell the computer everytime you type mongod look to this location
 that way you dont have to type it out everythime in the cmd line
 
@@ -113,6 +118,8 @@ We had images posting to the database and we were able to retrieve the data. How
 			fmt.Println(err)
 		}
 ```
+
+
 
 #### References
 https://www.tutorialspoint.com/mongodb/mongodb_gridfs.htm - Tutorial on GridFS
