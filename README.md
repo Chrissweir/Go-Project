@@ -1,10 +1,10 @@
 # GO Project Documentaion 
 ## Title: Image Bucket
 
-  - Chris Weir 
-  - Gareth Lynskey
-  - Patrick Griffin
-  - Paul Dolan
+  - Christopher Weir - G00309429
+  - Gareth Lynskey - G00312651
+  - Patrick Griffin - G00314635
+  - Paul Dolan - G00297086
 
 ### Introduction
 In summary, this a single Web application that a user can upload an image to be stored and can be retrieve in a later date. The user simply drags and drops the image or can "Choose file" to be uploaded.
@@ -62,4 +62,58 @@ that way you dont have to type it out everythime in the cmd line
 Now paste in for variable value **C:\Program Files\MongoDB\Server\3.2\bin**
 now you can type mongod and it now starts up without having to navigate to the location every time. Open up another cmd line and type mongo and now ready to type commands.
 
-#### Why we use GridFS
+#### Why we tried GridFS
+We started using GridFS to store and to retrieve large files such as images and videos or audio files. Its data is stored within MongoDB collections. GridFS strores files even greater than its document size of 16mb.
+
+GridFS divides a file into **chunks** and **files** and stores each chunk of data in a seperate document Chunks stores the binary chunks files stores the files metadata
+- fs.files
+- fs.chunks
+
+The form for chunks:
+```json
+{
+  "_id" : <ObjectId>,
+  "files_id" : <ObjectId>,
+  "n" : <num>,
+  "data" : <binary>
+}
+```
+The form for files:
+```json
+{
+  "_id" : <ObjectId>,
+  "length" : <num>,
+  "chunkSize" : <num>,
+  "uploadDate" : <timestamp>,
+  "md5" : <hash>,
+  "filename" : <string>,
+  "contentType" : <string>,
+  "aliases" : <string array>,
+  "metadata" : <dataObject>,
+}
+```
+
+We had images posting to the database and we were able to retrieve the data. However we were unable to convert this data back into the image for the user to view.
+```go
+        // Create the file in the Mongodb Gridfs instance
+		my_file, err := my_db.GridFS("fs").Create(filename)
+		if err != nil {
+			fmt.Println(err)
+		}
+		// Write the file to the Mongodb Gridfs instance
+		n, err := my_file.Write(data)
+		if err != nil {
+			fmt.Println(err)
+		}
+		file_id := my_file.Id().(bson.ObjectId).Hex()
+		response = file_id
+		// Close the file
+		err = my_file.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+```
+
+#### References
+https://www.tutorialspoint.com/mongodb/mongodb_gridfs.htm - Tutorial on GridFS
+https://docs.mongodb.com/manual/core/gridfs/ - MongoDB Website
