@@ -17,3 +17,6 @@ function showLink()
     $("#link").show();
 }
 
+(function(){
+    new Clipboard('#copy-button');
+})();
