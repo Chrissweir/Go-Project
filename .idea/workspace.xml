@@ -2,8 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cf389a9-aed9-488a-a881-1e453d5c5106" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/.babelrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/.banner" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/.editorconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/.github/issue_template.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/.npmignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/contributing.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/constructor-node.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/constructor-nodelist.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/constructor-selector.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/function-target.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/function-text.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/target-div.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/target-input.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/demo/target-textarea.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/dist/clipboard.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/dist/clipboard.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/karma.conf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/package.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/readme.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/src/clipboard-action.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/src/clipboard.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/test/clipboard-action.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.js-master/test/clipboard.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/clipboard.min.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/fileId.tmpl" afterPath="$PROJECT_DIR$/templates/fileId.tmpl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/Login.tmpl" afterPath="$PROJECT_DIR$/templates/Login.tmpl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/Registration.tmpl" afterPath="$PROJECT_DIR$/templates/Registration.tmpl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapp.go" afterPath="$PROJECT_DIR$/webapp.go" />
     </list>
     <ignored path="Go-Project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,11 +56,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="578">
+              <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -43,8 +74,8 @@
       <file leaf-file-name="webapp.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="971">
-              <caret line="124" column="28" selection-start-line="124" selection-start-column="28" selection-end-line="124" selection-end-column="28" />
+            <state relative-caret-position="359">
+              <caret line="196" column="37" selection-start-line="196" selection-start-column="37" selection-end-line="196" selection-end-column="37" />
               <folding>
                 <element signature="e#14#141#0" expanded="true" />
               </folding>
@@ -55,18 +86,20 @@
       <file leaf-file-name="Registration.tmpl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/Registration.tmpl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="58" column="87" selection-start-line="58" selection-start-column="87" selection-end-line="58" selection-end-column="87" />
-              <folding />
+            <state relative-caret-position="-92">
+              <caret line="32" column="60" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
+              <folding>
+                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.tmpl" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Login.tmpl" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/Login.tmpl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-221">
-              <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+            <state relative-caret-position="228">
+              <caret line="39" column="44" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -105,8 +138,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-153">
-              <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+            <state relative-caret-position="492">
+              <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -139,14 +172,14 @@
         <option value="$PROJECT_DIR$/public/index.js" />
         <option value="$PROJECT_DIR$/templates/hello.tmpl" />
         <option value="$PROJECT_DIR$/public/test.html" />
-        <option value="$PROJECT_DIR$/public/js/index.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/webapp.go" />
         <option value="$PROJECT_DIR$/public/css/styles.css" />
-        <option value="$PROJECT_DIR$/templates/Login.tmpl" />
-        <option value="$PROJECT_DIR$/templates/Registration.tmpl" />
         <option value="$PROJECT_DIR$/templates/Image.tmpl" />
         <option value="$PROJECT_DIR$/templates/fileId.tmpl" />
+        <option value="$PROJECT_DIR$/public/js/index.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/templates/Registration.tmpl" />
+        <option value="$PROJECT_DIR$/webapp.go" />
+        <option value="$PROJECT_DIR$/templates/Login.tmpl" />
       </list>
     </option>
   </component>
@@ -769,12 +802,12 @@
       <workItem from="1480369897333" duration="6508000" />
       <workItem from="1480414648415" duration="331000" />
       <workItem from="1480416734881" duration="2448000" />
-      <workItem from="1480432202642" duration="14047000" />
+      <workItem from="1480432202642" duration="17159000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92964000" />
+    <option name="totallyTimeSpent" value="96076000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -787,7 +820,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32937685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22848664" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1140,18 +1173,18 @@
     <entry file="file://$PROJECT_DIR$/public/js/plugins/canvas-to-blob.js" />
     <entry file="file://$PROJECT_DIR$/public/test.html" />
     <entry file="file://$PROJECT_DIR$/public/js/fileinput.js" />
-    <entry file="file://$PROJECT_DIR$/templates/Login.tmpl">
+    <entry file="file://$PROJECT_DIR$/templates/fileId.tmpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        <state relative-caret-position="-61">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+        <state relative-caret-position="492">
+          <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1172,42 +1205,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/fileId.tmpl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Registration.tmpl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="58" column="87" selection-start-line="58" selection-start-column="87" selection-end-line="58" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="971">
-          <caret line="124" column="28" selection-start-line="124" selection-start-column="28" selection-end-line="124" selection-end-column="28" />
-          <folding>
-            <element signature="e#14#141#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="578">
+          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#1691#1699#0" expanded="true" />
             <element signature="n#style#0;n#input#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Registration.tmpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-92">
+          <caret line="32" column="60" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="60" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="196" column="37" selection-start-line="196" selection-start-column="37" selection-end-line="196" selection-end-column="37" />
+          <folding>
+            <element signature="e#14#141#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Login.tmpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="39" column="44" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -15,6 +15,13 @@ type Image struct {
 	Encoded     string `json:"encoded" bson:"encoded"`
 }
 
+type User struct {
+	Id          bson.ObjectId `bson:"_id,omitempty"`
+	UserName    string `json:"username" bson:"username"`
+	Password     string `json:"password" bson:"password"`
+	Email     string `json:"email" bson:"email"`
+}
+
 type Encoded struct {
 	EncodedStr string   `json:"encoded" bson:"encoded"`
 }
@@ -27,9 +34,11 @@ func main() {
 	m.Get("/Login", func(ctx *macaron.Context){
 		ctx.HTML(200,"Login")
 	})
-	m.Get("/Registration", func(ctx *macaron.Context){
-		ctx.HTML(200,"Registration")
-	})
+	m.Combo("/Registration").
+		Get(func(ctx *macaron.Context){
+		ctx.HTML(200,"Registration")}).
+		Post(register)
+	m.Post("/Registration", register)
 	m.Get("/link", func(ctx *macaron.Context) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
 		ctx.Data["Id"] = response
@@ -143,4 +152,47 @@ func search(s string) string{
 		panic(err)
 	}
 	return encodedStr.EncodedStr
+}
+
+func register(w http.ResponseWriter, req *http.Request){
+	fmt.Println("Uploadhandler start")
+	session, err := mgo.Dial("127.0.0.1:27017")
+	if err != nil {
+		panic(err)
+	}
+
+	defer session.Close()
+
+	// Specify the Mongodb database
+	//my_db := session.DB("Images")
+
+	// Adapted from: http://stackoverflow.com/questions/22159665/store-uploaded-file-in-mongodb-gridfs-using-mgo-without-saving-to-memory
+	// Retrieve the form data
+	username := req.FormValue("username")
+	password := req.FormValue("password")
+	email := req.FormValue("email")
+	//Check if there is an error
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Print(username,email,password)
+	my_db := session.DB("Images")
+	//open file from GridFS
+	c := my_db.C("users")
+
+	user := &User{
+		Id: bson.NewObjectId(),
+		UserName:  username,
+		Password:   password,
+		Email:	email,
+	}
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	c.Insert(user)
+	if err != nil {
+		fmt.Println(err)
+	}
+	http.Redirect(w, req, "/Login", 303)
 }
