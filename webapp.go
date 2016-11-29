@@ -24,7 +24,7 @@ func main() {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
 	m.Post("/", upload)
-	m.Get("/link", func(ctx *macaron.Context) {
+	m.Get("/", func(ctx *macaron.Context) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
 		ctx.Data["Id"] = response
 		ctx.HTML(200, "fileId")
@@ -112,7 +112,7 @@ func upload(w http.ResponseWriter, req *http.Request) string{
 			fmt.Println(err)
 		}
 	*/
-	http.Redirect(w, req, "/link", 301)
+	http.Redirect(w, req, "/", 200)
 	return response
 }
 
