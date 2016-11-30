@@ -33,7 +33,8 @@ var UserDetails string = "false"
 func main() {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
-	m.Combo("/").
+	m.Post("/", upload)
+	m.Combo("/Home").
 		Get(func(ctx *macaron.Context){
 		ctx.Data["Auth"] = UserDetails
 		ctx.HTML(200,"Home")}).
@@ -53,7 +54,7 @@ func main() {
 	m.Get("/link", func(ctx *macaron.Context) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
 		ctx.Data["Id"] = response
-		ctx.HTML(200, "fileId")
+		ctx.HTML(200, "FileId")
 	})
 
 	m.Get("/search/:id", func(ctx *macaron.Context, w http.ResponseWriter) {
@@ -237,7 +238,7 @@ func login(w http.ResponseWriter, req *http.Request) string{
 		err = c.Find(bson.M{"email": email}).One(&auth)
 
 		if password == auth.Password {
-			http.Redirect(w, req, "/", 303)
+			http.Redirect(w, req, "/Home", 303)
 			LoginError = ""
 			UserDetails = auth.Email
 		} else {
@@ -246,7 +247,7 @@ func login(w http.ResponseWriter, req *http.Request) string{
 		}
 
 		fmt.Println(auth.Email, auth.Password, auth.UserName)
-		http.Redirect(w, req, "/", 303)
+		http.Redirect(w, req, "/Home", 303)
 	return LoginError
 }
 
