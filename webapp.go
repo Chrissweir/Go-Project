@@ -13,6 +13,14 @@ type Image struct {
 	Id          bson.ObjectId `bson:"_id,omitempty"`
 	FileName    string `json:"filename" bson:"filename"`
 	Encoded     string `json:"encoded" bson:"encoded"`
+	User     string `json:"user" bson:"user"`
+}
+
+type UserImage struct {
+	ImageId     string `json:"imageid" bson:"imageid"`
+	FileName    string `json:"filename" bson:"filename"`
+	Encoded     string `json:"encoded" bson:"encoded"`
+	User     string `json:"user" bson:"user"`
 }
 
 type User struct {
@@ -28,7 +36,7 @@ type Encoded struct {
 
 var response string = ""
 var LoginError string = ""
-var UserDetails string = "false"
+var UserDetails string = "null"
 
 func main() {
 	m := macaron.Classic()
@@ -39,6 +47,12 @@ func main() {
 		ctx.Data["Auth"] = UserDetails
 		ctx.HTML(200,"Home")}).
 		Post(upload)
+
+	m.Get("/Logout", func(ctx *macaron.Context){
+		UserDetails = "null"
+		ctx.Data["Auth"] = UserDetails
+		ctx.HTML(200,"Logout")
+	})
 
 	m.Combo("/Login").
 		Get(confirmUser, func(ctx *macaron.Context){
@@ -51,8 +65,14 @@ func main() {
 		ctx.HTML(200,"Registration")}).
 		Post(register)
 
+	m.Get("/MyImages", func(ctx *macaron.Context){
+		ctx.Data["Auth"] = UserDetails
+		ctx.Data["ImageList"] = userImages(nil,nil)
+		ctx.HTML(200,"MyImages")})
+
 	m.Get("/link", func(ctx *macaron.Context) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
+		ctx.Data["Auth"] = UserDetails
 		ctx.Data["Id"] = response
 		ctx.HTML(200, "FileId")
 	})
@@ -100,10 +120,12 @@ func upload(w http.ResponseWriter, req *http.Request) string{
 	if err != nil {
 		fmt.Println(err)
 	}
-	img := &Image{
-		Id: bson.NewObjectId(),
+	image_id:=bson.NewObjectId().Hex()
+	img := &UserImage{
+		ImageId: image_id,
 		FileName:  filename,
 		Encoded:   encodedStr,
+		User:	UserDetails,
 	}
 	if err != nil {
 		fmt.Println(err)
@@ -113,7 +135,7 @@ func upload(w http.ResponseWriter, req *http.Request) string{
 	if err != nil {
 		fmt.Println(err)
 	}
-	image_id := img.Id.Hex()
+
 	response = image_id
 	fmt.Println(response)
 	if err != nil {
@@ -158,9 +180,8 @@ func search(s string) string{
 	my_db := session.DB("Images")
 	//open file from GridFS
 	c := my_db.C("images")
-	id:= bson.ObjectIdHex(img_id)
 	encodedStr := Encoded{}
-	err = c.Find(bson.M{"_id": id}).One(&encodedStr)
+	err = c.Find(bson.M{"imageid": img_id}).One(&encodedStr)
 	if err != nil {
 		panic(err)
 	}
@@ -238,7 +259,7 @@ func login(w http.ResponseWriter, req *http.Request) string{
 		err = c.Find(bson.M{"email": email}).One(&auth)
 
 		if password == auth.Password {
-			http.Redirect(w, req, "/Home", 303)
+			http.Redirect(w, req, "/MyImages", 303)
 			LoginError = ""
 			UserDetails = auth.Email
 		} else {
@@ -247,14 +268,36 @@ func login(w http.ResponseWriter, req *http.Request) string{
 		}
 
 		fmt.Println(auth.Email, auth.Password, auth.UserName)
-		http.Redirect(w, req, "/Home", 303)
-	return LoginError
+		return LoginError
 }
 
 func confirmUser(w http.ResponseWriter, req *http.Request){
 	fmt.Println(UserDetails)
-	if UserDetails !="false" {
+	if UserDetails !="null" {
 		http.Redirect(w, req, "/MyImages", 303)
 	}
+}
+
+func userImages(w http.ResponseWriter, req *http.Request) []UserImage{
+	session, err := mgo.Dial("127.0.0.1:27017")
+	if err != nil {
+		panic(err)
+	}
+
+	defer session.Close()
+
+	// Specify the Mongodb database
+	//Check if there is an error
+	if err != nil {
+		fmt.Println(err)
+	}
+	my_db := session.DB("Images")
+	//open file from GridFS
+	c := my_db.C("images")
+	var listImage []UserImage
+	err = c.Find(bson.M{"user": UserDetails}).All(&listImage)
+	fmt.Println(listImage)
+
+	return listImage
 }
 
