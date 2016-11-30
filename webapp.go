@@ -27,27 +27,39 @@ type Encoded struct {
 }
 
 var response string = ""
+var LoginError string = ""
+var UserDetails string = "false"
+
 func main() {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
-	m.Post("/", upload)
-	m.Get("/Login", func(ctx *macaron.Context){
-		ctx.HTML(200,"Login")
-	})
-	m.Combo("/Registration").
+	m.Combo("/").
 		Get(func(ctx *macaron.Context){
+		ctx.Data["Auth"] = UserDetails
+		ctx.HTML(200,"Home")}).
+		Post(upload)
+
+	m.Combo("/Login").
+		Get(confirmUser, func(ctx *macaron.Context){
+		ctx.Data["Error"] = LoginError
+		ctx.HTML(200,"Login")}).
+		Post(login)
+
+	m.Combo("/Registration").
+		Get(confirmUser,func(ctx *macaron.Context){
 		ctx.HTML(200,"Registration")}).
 		Post(register)
-	m.Post("/Registration", register)
+
 	m.Get("/link", func(ctx *macaron.Context) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
 		ctx.Data["Id"] = response
 		ctx.HTML(200, "fileId")
 	})
+
 	m.Get("/search/:id", func(ctx *macaron.Context, w http.ResponseWriter) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
 		ctx.Data["Id"] = search(ctx.Params(":id"))
-		ctx.HTML(200, "hello")
+		ctx.HTML(200, "Image")
 	})
 	m.Run(8080)
 }
@@ -196,3 +208,52 @@ func register(w http.ResponseWriter, req *http.Request){
 	}
 	http.Redirect(w, req, "/Login", 303)
 }
+
+func login(w http.ResponseWriter, req *http.Request) string{
+
+		session, err := mgo.Dial("127.0.0.1:27017")
+		if err != nil {
+			panic(err)
+		}
+
+		defer session.Close()
+
+		// Specify the Mongodb database
+		//my_db := session.DB("Images")
+
+		// Adapted from: http://stackoverflow.com/questions/22159665/store-uploaded-file-in-mongodb-gridfs-using-mgo-without-saving-to-memory
+		// Retrieve the form data
+		email := req.FormValue("email")
+		password := req.FormValue("password")
+
+		//Check if there is an error
+		if err != nil {
+			fmt.Println(err)
+		}
+		my_db := session.DB("Images")
+		//open file from GridFS
+		c := my_db.C("users")
+		auth := User{}
+		err = c.Find(bson.M{"email": email}).One(&auth)
+
+		if password == auth.Password {
+			http.Redirect(w, req, "/", 303)
+			LoginError = ""
+			UserDetails = auth.Email
+		} else {
+			LoginError = "Incorrect Details"
+			http.Redirect(w, req, "/Login", 303)
+		}
+
+		fmt.Println(auth.Email, auth.Password, auth.UserName)
+		http.Redirect(w, req, "/", 303)
+	return LoginError
+}
+
+func confirmUser(w http.ResponseWriter, req *http.Request){
+	fmt.Println(UserDetails)
+	if UserDetails !="false" {
+		http.Redirect(w, req, "/MyImages", 303)
+	}
+}
+
