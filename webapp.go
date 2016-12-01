@@ -42,58 +42,67 @@ var LoginError string = ""//LoginError used for when the user enters incorrect l
 var UserDetails string = "null"//UserDetails used to check if a user is logged in - set to null as default
 
 //Functions-------------------------------------------------------------------------------------
-//Main Function
+//Main Function-------------------------------------------------------------------------------------
 func main() {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
-
-	//Call upload func when Post method is activated from the root page
-	m.Post("/", upload)
+	// Some of the following functions have been adapted from: https://go-macaron.com/docs/middlewares/templating
+	//Handler for /
+	m.Post("/", upload)//Call upload func when Post method is activated from the root page
 
 	//Combo Get and Post for the Home page
-	m.Combo("/Home").
+	m.Combo("/Home"). //Handler for /Home
 		Get(func(ctx *macaron.Context){
-		ctx.Data["Auth"] = UserDetails//Send UserDetails to the Home page to check if user is logged in
+		ctx.Data["Auth"] = UserDetails//Send UserDetails to the Home template page to check if user is logged in
 		ctx.HTML(200,"Home")}). //Load the Home template
-		Post(upload)
+		Post(upload) //Call upload func when post method is activated from the Home page
 
-	m.Get("/Logout", func(ctx *macaron.Context){
+	//Get for the Logout page
+	m.Get("/Logout", //Handler for /Logout
+		func(ctx *macaron.Context){
 		UserDetails = "null" //Set UserDetails back to null when user signs out
-		ctx.Data["Auth"] = UserDetails //Send UserDetails to the Logout page to check if user is logged in
-		ctx.HTML(200,"Logout") //Load the Logout template
-	})
+		ctx.Data["Auth"] = UserDetails //Send UserDetails to the Logout template page to check if user is logged in
+		ctx.HTML(200,"Logout")}) //Load the Logout template
 
-	m.Combo("/Login").
-		Get(confirmUser, func(ctx *macaron.Context){
-		ctx.Data["Error"] = LoginError
+	//Combo Get and Post for the Login page
+	m.Combo("/Login").//Handler for /Login
+		Get(confirmUser, //Call confirmUser func to check if a user is logged in
+		func(ctx *macaron.Context){
+		ctx.Data["Error"] = LoginError //Send LoginError to the Login template page when the user enters incorrect login details
 		ctx.HTML(200,"Login")}). //Load the login template
-		Post(login)
+		Post(login) //Call login func when post method is activated from the Login page
 
-	m.Combo("/Registration").
+	//Combo Get and Post for the Registration page
+	m.Combo("/Registration").//Handler for /Registration
 		Get(confirmUser,func(ctx *macaron.Context){
 		ctx.HTML(200,"Registration")}). //Load the Registration template
-		Post(register)
+		Post(register) //Call register func when post method is activated from the Registration page
 
-	m.Get("/MyImages", func(ctx *macaron.Context){
+	//Get for the MyImages page
+	m.Get("/MyImages", //Handler for /MyImages
+		func(ctx *macaron.Context){
 		ctx.Data["Auth"] = UserDetails //Send UserDetails to the MyImages page to check if user is logged in
-		ctx.Data["ImageList"] = userImages(nil,nil)
+		ctx.Data["ImageList"] = userImages(nil,nil) //Send the return value from func userImages (the users images) to the MyImages template
 		ctx.HTML(200,"MyImages")}) //Load the MyImages template
 
-	m.Get("/link", func(ctx *macaron.Context) {
-		// Adapted from: https://go-macaron.com/docs/middlewares/templating
+	//Get for the link page
+	m.Get("/link", //Handler for /link
+		func(ctx *macaron.Context) {
 		ctx.Data["Auth"] = UserDetails //Send UserDetails to the Link page to check if user is logged in
-		ctx.Data["Id"] = response
+		ctx.Data["Id"] = response // Send the uploaded image id to the FileId template page
 		ctx.HTML(200, "FileId") //Load the FileId template
 	})
 
-	m.Get("/search/:id", func(ctx *macaron.Context, w http.ResponseWriter) {
-		// Adapted from: https://go-macaron.com/docs/middlewares/templating
-		ctx.Data["Id"] = search(ctx.Params(":id"))
-		ctx.HTML(200, "Image") //Load the image template
+	//Get for the search page
+	m.Get("/search/:id", //Handler for /search that takes in paramaters
+		func(ctx *macaron.Context, w http.ResponseWriter) {
+		ctx.Data["Id"] = search(ctx.Params(":id"))// Send the return value of the search func (the requested image data) to the Image template page
+		ctx.HTML(200, "Image") //Load the Image template
 	})
+
 	m.Run(8080) //Run on port 8080
 }
-
+//Upload Function-------------------------------------------------------------------------------------
 func upload(w http.ResponseWriter, req *http.Request) string{
 	session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
 	if err != nil {
@@ -149,27 +158,6 @@ func upload(w http.ResponseWriter, req *http.Request) string{
 	if err != nil {
 		fmt.Println(err)
 	}
-	/*
-		// Create the file in the Mongodb Gridfs instance
-		my_file, err := my_db.GridFS("fs").Create(filename)
-		if err != nil {
-			fmt.Println(err)
-		}
-		// Write the file to the Mongodb Gridfs instance
-		n, err := my_file.Write(data)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		file_id := my_file.Id().(bson.ObjectId).Hex()
-		response = file_id
-
-		// Close the file
-		err = my_file.Close()
-		if err != nil {
-			fmt.Println(err)
-		}
-	*/
 	http.Redirect(w, req, "/link", 303)
 	return response
 }
