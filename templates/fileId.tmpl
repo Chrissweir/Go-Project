@@ -1,17 +1,13 @@
-<html><!-- Latest compiled and minified CSS -->
+<html lang="en">
 <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/index.js"></script>
-
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <!--Check if a user is logged in, if so change the list items -->
     <script>
         $(document).ready(function(){
-
-            var n = "{{.Auth}}";
-
+            var n = "{{.Auth}}"; //variable from webapp.go global variable UserDetails
             if (n !="null") {
                 document.getElementById("My").innerHTML = "<a href='/MyImages'>My Images</a>";
                 document.getElementById("Reg").style.visibility='hidden';
@@ -22,9 +18,11 @@
                 document.getElementById("Reg").innerHTML = "<a href='/Registration'>Register</a>";
                 document.getElementById("Log").innerHTML = "<a href='/Login'>Login</a>";
             }
-
         });
     </script>
+    <!--
+    Adapted from: http://getbootstrap.com/components/#navbar
+    -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -42,15 +40,14 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
 </head>
 <body>
-<div class="alert alert-success" align="center" role="alert">Image Upload Successful!</div>
-<div align="center">
-<span>
-<a href="http://127.0.0.1:8080/search/{{.Id}}" id="copytext">127.0.0.1:8080/search/{{.Id}}</a>
-</span>
-<br>
-
+    <div class="alert alert-success" align="center" role="alert">Image Upload Successful!</div>
+    <div align="center">
+        <span>
+            <a href="http://127.0.0.1:8080/search/{{.Id}}" id="copytext">127.0.0.1:8080/search/{{.Id}}</a>
+        </span>
+        <br>
+    </div>
 </body>
 </html>

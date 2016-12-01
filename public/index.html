@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/index.js"></script>
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <!-- Function to hide list item #My-->
     <script>
-        $(document).ready(function(){
-                document.getElementById("My").style.visibility='hidden';
+        $(document).ready(function () {
+            document.getElementById("My").style.visibility = 'hidden';
         });
     </script>
+    <!--
+    Adapted from: http://getbootstrap.com/components/#navbar
+    -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">ImageBucket</a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -29,29 +30,29 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
 </head>
+<!--
+Adapted from: https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
+-->
 <body style="background-color: white">
 <div class="container" style="margin-top: 20px; padding-left: 300px; padding-right: 300px; background-color: ivory; text-align: center;">
-            <h4>Image Upload</h4>
-            <form enctype="multipart/form-data" method="post" action="/">
-            <div class="input-group">
-                <label class="input-group-btn">
+    <h4>Image Upload</h4>
+    <form enctype="multipart/form-data" method="post" action="/">
+        <div class="input-group">
+            <label class="input-group-btn">
                     <span class="btn btn-primary">
                         Browse&hellip; <input type="file" name="uploadfile" style="display: none;" onchange="readURL(this)" multiple>
                     </span>
-                </label>
-                <input type="text" class="form-control" readonly>
-
-            </div>
-            <span class="help-block">
+            </label>
+            <input type="text" class="form-control" readonly>
+        </div>
+        <span class="help-block">
                 Browse and select an Image
                   <br>
-                <button class="btn btn-primary"  type="submit">Upload</button>
+                <button class="btn btn-primary" type="submit">Upload</button>
             </span>
-                <img style="width: 100%; max-width: 600px; text-align: center;" id="image"/>
-            </form>
+        <img style="width: 100%; max-width: 600px; text-align: center;" id="image"/>
+    </form>
 </div>
-
 </body>
 </html>

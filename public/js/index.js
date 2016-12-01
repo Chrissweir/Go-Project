@@ -1,3 +1,4 @@
+//Function to display the Image that has been selected to be uploaded
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -7,9 +8,11 @@ function readURL(input) {
                 .attr('src', e.target.result)
         };
 
-        reader.readAsDataURL(input.files[0]);
     }
 }
+//
+//Adapted from https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
+//
 $(function() {
 
     // We can attach the `fileselect` event to all file inputs on the page

@@ -234,42 +234,42 @@ func register(w http.ResponseWriter, req *http.Request){
 
 func login(w http.ResponseWriter, req *http.Request) string{
 
-		session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
-		if err != nil {
-			panic(err)
-		}
+	session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
+	if err != nil {
+		panic(err)
+	}
 
-		defer session.Close()
+	defer session.Close()
 
-		// Specify the Mongodb database
-		//my_db := session.DB("Images")
+	// Specify the Mongodb database
+	//my_db := session.DB("Images")
 
-		// Adapted from: http://stackoverflow.com/questions/22159665/store-uploaded-file-in-mongodb-gridfs-using-mgo-without-saving-to-memory
-		// Retrieve the form data
-		email := req.FormValue("email")
-		password := req.FormValue("password")
+	// Adapted from: http://stackoverflow.com/questions/22159665/store-uploaded-file-in-mongodb-gridfs-using-mgo-without-saving-to-memory
+	// Retrieve the form data
+	email := req.FormValue("email")
+	password := req.FormValue("password")
 
-		//Check if there is an error
-		if err != nil {
-			fmt.Println(err)
-		}
-		my_db := session.DB("heroku_t76cfn1s")
-		//open file from GridFS
-		c := my_db.C("users")
-		auth := User{}
-		err = c.Find(bson.M{"email": email}).One(&auth)
+	//Check if there is an error
+	if err != nil {
+		fmt.Println(err)
+	}
+	my_db := session.DB("heroku_t76cfn1s")
+	//open file from GridFS
+	c := my_db.C("users")
+	auth := User{}
+	err = c.Find(bson.M{"email": email}).One(&auth)
 
-		if password == auth.Password {
-			http.Redirect(w, req, "/MyImages", 303)
-			LoginError = ""
-			UserDetails = auth.Email
-		} else {
-			LoginError = "Incorrect Details"
-			http.Redirect(w, req, "/Login", 303)
-		}
+	if password == auth.Password {
+		http.Redirect(w, req, "/MyImages", 303)
+		LoginError = ""
+		UserDetails = auth.Email
+	} else {
+		LoginError = "Incorrect Details"
+		http.Redirect(w, req, "/Login", 303)
+	}
 
-		fmt.Println(auth.Email, auth.Password, auth.UserName)
-		return LoginError
+	fmt.Println(auth.Email, auth.Password, auth.UserName)
+	return LoginError
 }
 
 func confirmUser(w http.ResponseWriter, req *http.Request){
