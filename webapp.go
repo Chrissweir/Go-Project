@@ -88,7 +88,7 @@ func main() {
 
 func upload(w http.ResponseWriter, req *http.Request) string{
 	fmt.Println("Uploadhandler start")
-	session, err := mgo.Dial("127.0.0.1:27017")
+	session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
 	if err != nil {
 		panic(err)
 	}
@@ -96,7 +96,7 @@ func upload(w http.ResponseWriter, req *http.Request) string{
 	defer session.Close()
 
 	// Specify the Mongodb database
-	my_db := session.DB("Images")
+	my_db := session.DB("heroku_t76cfn1s")
 
 	// Adapted from: http://stackoverflow.com/questions/22159665/store-uploaded-file-in-mongodb-gridfs-using-mgo-without-saving-to-memory
 	// Retrieve the form file
@@ -171,14 +171,14 @@ func search(s string) string{
 
 	img_id := s
 
-	session, err := mgo.Dial("127.0.0.1:27017")
+	session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
 	if err != nil {
 		panic(err)
 	}
 
 	defer session.Close()
 	// Specify the Mongodb database
-	my_db := session.DB("Images")
+	my_db := session.DB("heroku_t76cfn1s")
 	//open file from GridFS
 	c := my_db.C("images")
 	encodedStr := Encoded{}
@@ -191,7 +191,7 @@ func search(s string) string{
 
 func register(w http.ResponseWriter, req *http.Request){
 	fmt.Println("Uploadhandler start")
-	session, err := mgo.Dial("127.0.0.1:27017")
+	session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
 	if err != nil {
 		panic(err)
 	}
@@ -211,7 +211,7 @@ func register(w http.ResponseWriter, req *http.Request){
 		fmt.Println(err)
 	}
 	fmt.Print(username,email,password)
-	my_db := session.DB("Images")
+	my_db := session.DB("heroku_t76cfn1s")
 	//open file from GridFS
 	c := my_db.C("users")
 
@@ -234,7 +234,7 @@ func register(w http.ResponseWriter, req *http.Request){
 
 func login(w http.ResponseWriter, req *http.Request) string{
 
-		session, err := mgo.Dial("127.0.0.1:27017")
+		session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
 		if err != nil {
 			panic(err)
 		}
@@ -253,7 +253,7 @@ func login(w http.ResponseWriter, req *http.Request) string{
 		if err != nil {
 			fmt.Println(err)
 		}
-		my_db := session.DB("Images")
+		my_db := session.DB("heroku_t76cfn1s")
 		//open file from GridFS
 		c := my_db.C("users")
 		auth := User{}
@@ -280,7 +280,7 @@ func confirmUser(w http.ResponseWriter, req *http.Request){
 }
 
 func userImages(w http.ResponseWriter, req *http.Request) string {
-	session, err := mgo.Dial("127.0.0.1:27017")
+	session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
 	if err != nil {
 		panic(err)
 	}
@@ -292,7 +292,7 @@ func userImages(w http.ResponseWriter, req *http.Request) string {
 	if err != nil {
 		fmt.Println(err)
 	}
-	my_db := session.DB("Images")
+	my_db := session.DB("heroku_t76cfn1s")
 	//open file from GridFS
 	c := my_db.C("images")
 
