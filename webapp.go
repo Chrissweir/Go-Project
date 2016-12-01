@@ -1,5 +1,4 @@
 package main
-
 import (
 	"gopkg.in/macaron.v1"
 	"gopkg.in/mgo.v2"
@@ -10,84 +9,92 @@ import (
 	"encoding/base64"
 	"encoding/json"
 )
+//Structures-----------------------------------------------------------------------------
+//Image Upload Structure
 type Image struct {
 	ImageId     string `json:"imageid" bson:"imageid"`
 	FileName    string `json:"filename" bson:"filename"`
 	Encoded     string `json:"encoded" bson:"encoded"`
 	User     string `json:"user" bson:"user"`
 }
-
+//User Image Retrieval Structure
 type UserImage struct {
 	ImageId     string `json:"imageid" bson:"imageid"`
 	FileName    string `json:"filename" bson:"filename"`
 	Encoded     string `json:"encoded" bson:"encoded"`
 	User     string `json:"user" bson:"user"`
 }
-
+//User Registration & Login Structure
 type User struct {
 	Id          bson.ObjectId `bson:"_id,omitempty"`
 	UserName    string `json:"username" bson:"username"`
 	Password     string `json:"password" bson:"password"`
 	Email     string `json:"email" bson:"email"`
 }
-
+//Uploaded Image Link Retrieval Structure
 type Encoded struct {
 	EncodedStr string   `json:"encoded" bson:"encoded"`
 }
 
-var response string = ""
-var LoginError string = ""
-var UserDetails string = "null"
+//Global Variables-----------------------------------------------------------------------------
+var response string = ""//response used for sending back the link for the uploaded Image
+var LoginError string = ""//LoginError used for when the user enters incorrect login details
+var UserDetails string = "null"//UserDetails used to check if a user is logged in - set to null as default
 
+//Functions-------------------------------------------------------------------------------------
+//Main Function
 func main() {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
+
+	//Call upload func when Post method is activated from the root page
 	m.Post("/", upload)
+
+	//Combo Get and Post for the Home page
 	m.Combo("/Home").
 		Get(func(ctx *macaron.Context){
-		ctx.Data["Auth"] = UserDetails
-		ctx.HTML(200,"Home")}).
+		ctx.Data["Auth"] = UserDetails//Send UserDetails to the Home page to check if user is logged in
+		ctx.HTML(200,"Home")}). //Load the Home template
 		Post(upload)
 
 	m.Get("/Logout", func(ctx *macaron.Context){
-		UserDetails = "null"
-		ctx.Data["Auth"] = UserDetails
-		ctx.HTML(200,"Logout")
+		UserDetails = "null" //Set UserDetails back to null when user signs out
+		ctx.Data["Auth"] = UserDetails //Send UserDetails to the Logout page to check if user is logged in
+		ctx.HTML(200,"Logout") //Load the Logout template
 	})
 
 	m.Combo("/Login").
 		Get(confirmUser, func(ctx *macaron.Context){
 		ctx.Data["Error"] = LoginError
-		ctx.HTML(200,"Login")}).
+		ctx.HTML(200,"Login")}). //Load the login template
 		Post(login)
 
 	m.Combo("/Registration").
 		Get(confirmUser,func(ctx *macaron.Context){
-		ctx.HTML(200,"Registration")}).
+		ctx.HTML(200,"Registration")}). //Load the Registration template
 		Post(register)
 
 	m.Get("/MyImages", func(ctx *macaron.Context){
-		ctx.Data["Auth"] = UserDetails
+		ctx.Data["Auth"] = UserDetails //Send UserDetails to the MyImages page to check if user is logged in
 		ctx.Data["ImageList"] = userImages(nil,nil)
-		ctx.HTML(200,"MyImages")})
+		ctx.HTML(200,"MyImages")}) //Load the MyImages template
 
 	m.Get("/link", func(ctx *macaron.Context) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
-		ctx.Data["Auth"] = UserDetails
+		ctx.Data["Auth"] = UserDetails //Send UserDetails to the Link page to check if user is logged in
 		ctx.Data["Id"] = response
-		ctx.HTML(200, "FileId")
+		ctx.HTML(200, "FileId") //Load the FileId template
 	})
 
 	m.Get("/search/:id", func(ctx *macaron.Context, w http.ResponseWriter) {
 		// Adapted from: https://go-macaron.com/docs/middlewares/templating
 		ctx.Data["Id"] = search(ctx.Params(":id"))
-		ctx.HTML(200, "Image")
+		ctx.HTML(200, "Image") //Load the image template
 	})
-	m.Run(8080)
+	m.Run(8080) //Run on port 8080
 }
 
 func upload(w http.ResponseWriter, req *http.Request) string{
-	fmt.Println("Uploadhandler start")
 	session, err := mgo.Dial("mongodb://test:test@ds113958.mlab.com:13958/heroku_t76cfn1s")
 	if err != nil {
 		panic(err)

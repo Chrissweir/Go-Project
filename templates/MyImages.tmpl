@@ -1,17 +1,13 @@
-<!DOCTYPE>
-<html>
+<html lang="en">
 <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../public/js/index.js"></script>
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <!--Check if a user is logged in, if so change the list items -->
     <script>
         $(document).ready(function(){
-
-            var n = "{{.Auth}}";
-
+            var n = "{{.Auth}}";//variable from webapp.go global variable UserDetails
             if (n !="null") {
                 document.getElementById("Reg").style.visibility='hidden';
                 document.getElementById("Log").innerHTML = "<a href='/Logout'>Logout</a>";
@@ -20,9 +16,10 @@
                 document.getElementById("Reg").innerHTML = "<a href='/Registration'>Register</a>";
                 document.getElementById("Log").innerHTML = "<a href='/Login'>Login</a>";
             }
-            var obj = JSON.parse("{{.ImageList}}");
-            var inHTML = "";
-            $.each(obj, function(index, value) {
+            var obj = JSON.parse("{{.ImageList}}");//variable from webapp.go global variable images
+            var data = "";
+            $.each(obj, function(index, value) {//for each object get the value for each key in the object
+                //create html on the fly with the add object values inserted
                 var newItem =
                         "<div class='col-lg-3 col-md-4 col-xs-6 thumb'>" +
                         "<a class='thumbnail' href='http://127.0.0.1:8080/search/"+value.imageid+"'>" +
@@ -31,25 +28,20 @@
                         "</div>" +
                         "</a>" +
                         "</div>";
-
-                //var newItem = "<p>" + value.imageid +" "+ value.filename +" "+ value.encoded +" "+ value.user +" "+ "</p>";
-                inHTML += newItem;
+                data += newItem;
             });
-            $("#ImagesGallery").html(inHTML); //add generated tr html to corresponding table
-
-
+            $("#ImagesGallery").html(data); //add generated html to the div #ImageGallery
         });
-
-
-
     </script>
+    <!--
+    Adapted from: http://getbootstrap.com/components/#navbar
+    -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="/Home">ImageBucket</a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -60,20 +52,18 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
 </head>
 <body>
+<!--
+http://bootsnipp.com/snippets/featured/google-style-login
+-->
 <div class="container">
-
     <div class="row">
-
         <div class="col-lg-12">
             <h1 class="page-header">Gallery</h1>
         </div>
-        <div id="ImagesGallery">
-        </div>
+        <div id="ImagesGallery"></div>
     </div>
 </div>
-<div id="Test"></div>
 </body>
 </html>
