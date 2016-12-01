@@ -8,9 +8,10 @@ import (
 	"io/ioutil"
 	"gopkg.in/mgo.v2/bson"
 	"encoding/base64"
+	"encoding/json"
 )
 type Image struct {
-	Id          bson.ObjectId `bson:"_id,omitempty"`
+	ImageId     string `json:"imageid" bson:"imageid"`
 	FileName    string `json:"filename" bson:"filename"`
 	Encoded     string `json:"encoded" bson:"encoded"`
 	User     string `json:"user" bson:"user"`
@@ -121,7 +122,7 @@ func upload(w http.ResponseWriter, req *http.Request) string{
 		fmt.Println(err)
 	}
 	image_id:=bson.NewObjectId().Hex()
-	img := &UserImage{
+	img := &Image{
 		ImageId: image_id,
 		FileName:  filename,
 		Encoded:   encodedStr,
@@ -278,7 +279,7 @@ func confirmUser(w http.ResponseWriter, req *http.Request){
 	}
 }
 
-func userImages(w http.ResponseWriter, req *http.Request) []UserImage{
+func userImages(w http.ResponseWriter, req *http.Request) string {
 	session, err := mgo.Dial("127.0.0.1:27017")
 	if err != nil {
 		panic(err)
@@ -294,10 +295,14 @@ func userImages(w http.ResponseWriter, req *http.Request) []UserImage{
 	my_db := session.DB("Images")
 	//open file from GridFS
 	c := my_db.C("images")
+
 	var listImage []UserImage
 	err = c.Find(bson.M{"user": UserDetails}).All(&listImage)
-	fmt.Println(listImage)
-	return listImage
+
+	fmt.Println(&listImage)
+	imagesList := &listImage
+	images, err := json.Marshal(imagesList)
+	return string(images)
 
 }
 

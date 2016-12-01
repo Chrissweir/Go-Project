@@ -20,9 +20,19 @@
                 document.getElementById("Reg").innerHTML = "<a href='/Registration'>Register</a>";
                 document.getElementById("Log").innerHTML = "<a href='/Login'>Login</a>";
             }
-            var arr ="{{.ImageList}}";
-            arr.split(" ")
-            document.getElementById("Test").innerHTML = arr;
+            var obj = JSON.parse("{{.ImageList}}");
+            var inHTML = "";
+            $.each(obj, function(index, value) {
+                var newItem = "<div class='col-lg-3 col-md-4 col-xs-6 thumb'><a class='thumbnail' href='http://127.0.0.1:8080/search/"+value.imageid+"'><img class='img-responsive' src='data:image/png;base64,"+value.encoded+"'><div class='caption'><p>"+value.filename+"</p></div></a></div>";
+
+                //var newItem = "<p>" + value.imageid +" "+ value.filename +" "+ value.encoded +" "+ value.user +" "+ "</p>";
+                inHTML += newItem;
+            });
+           // var result = obj.map(function(a) {return a.imageid;});
+           // $("#Test").html(inHTML); //add generated tr html to corresponding table
+            document.getElementById("ImagesGallery").innerHTML = inHTML;
+
+
         });
 
 
@@ -55,106 +65,10 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Gallery</h1>
             </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    <div class="caption">
-                       <p>image id</p>
-                    </div>
-                </a>
+            <div id="ImagesGallery">
             </div>
         </div>
-
     </div>
-<p id="Test"></p>
+<div id="Test"></div>
 </body>
 </html>
