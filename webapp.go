@@ -297,7 +297,7 @@ func userImages(w http.ResponseWriter, req *http.Request) []UserImage{
 	var listImage []UserImage
 	err = c.Find(bson.M{"user": UserDetails}).All(&listImage)
 	fmt.Println(listImage)
-
 	return listImage
+
 }
 
