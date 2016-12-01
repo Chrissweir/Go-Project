@@ -305,13 +305,15 @@ func userImages(w http.ResponseWriter, req *http.Request) string {
 	}
 	//Set the database collection
 	c := my_db.C("images")
-
+	//Set listImage as a UserImage struct array
 	var listImage []UserImage
+	//Query the database to find all the records that are associated with the users email (UserDetails)
+	//Set query results to listImage
 	err = c.Find(bson.M{"user": UserDetails}).All(&listImage)
-
-	fmt.Println(&listImage)
 	imagesList := &listImage
+	//Json marshel imageList and assign its value to images
 	images, err := json.Marshal(imagesList)
+	//Return the string value of images
 	return string(images)
 
 }
