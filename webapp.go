@@ -156,7 +156,7 @@ func upload(w http.ResponseWriter, req *http.Request) string{
 		fmt.Println(err)
 	}
 	//Redirect the user to the /link page
-	http.Redirect(w, req, "/link", 200)
+	http.Redirect(w, req, "/link", 303)
 	//Return response (string)
 	return response
 }
@@ -231,7 +231,7 @@ func register(w http.ResponseWriter, req *http.Request){
 		fmt.Println(err)
 	}
 	//Redirect the user to the Login Page
-	http.Redirect(w, req, "/Login", 200)
+	http.Redirect(w, req, "/Login", 303)
 }
 
 //Login Function-------------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ func login(w http.ResponseWriter, req *http.Request) string{
 	//Check if the inserted password matches the password that retrieved from the database
 	if password == auth.Password {
 		//If the passwords match then redirect to /MyImages
-		http.Redirect(w, req, "/MyImages", 200)
+		http.Redirect(w, req, "/MyImages", 303)
 		//Set the LoginError variable to default
 		LoginError = ""
 		//Set the UserDetails to the email entered
@@ -274,7 +274,7 @@ func login(w http.ResponseWriter, req *http.Request) string{
 		//If the passwords did not match then set LoginError to "Incorrect Details"
 		LoginError = "Incorrect Details"
 		//Redirect the user back to the login page to try again
-		http.Redirect(w, req, "/Login", 200)
+		http.Redirect(w, req, "/Login", 303)
 	}
 	//Return the LoginError
 	return LoginError
@@ -284,7 +284,7 @@ func login(w http.ResponseWriter, req *http.Request) string{
 func confirmUser(w http.ResponseWriter, req *http.Request){
 	//Check if a user is logged in and if they are, then redirect to the MyImages page
 	if UserDetails !="null" {
-		http.Redirect(w, req, "/MyImages", 200)
+		http.Redirect(w, req, "/MyImages", 303)
 	}
 }
 
