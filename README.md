@@ -20,47 +20,17 @@ go get gopkg.in/mgo.v2/bson
 
 **git clone this repository or download this project**
 
-While that is downloading MongoDB needs to be running in the background for ImageBucket to work if you dont have mongo set up
-please follow the instructions on the __***wiki***__ page above
+For ImageBucket to work you need Mongodb. We have decided to host our mongodb database on Heroku using mLabs for the users convienience of the user.
 
-After mongo is installed and you followed the shortcut instructions provided in the wiki or you already have it installed run the command to get mongo running
-```
-mongod
-```
-Now that mongo is running its time to move back to the project.
-
-navigate into the project and build and run:
+Navigate into the project and build and run:
 ```
 cd Go-Project
 go build webapp.go
 .\webapp.exe
 ```
-Browse and upload an image
+Browse and upload an image, register and sign in!
 
-If you would like to display the image data go back to the command promt and run:
-```
-mongo
-```
-This connects to mongo
-```
-show dbs
-```
-You will find that a database has been made called Images
-```
-use Images
-```
-Changed the database
-
-```
-show collections
-```
-A collection called images is displayed
-
-db.images.find()
-Displays the image data that has been created
-
-You can do the same with Usera.
-
+To return to the image upload page simply click the ImageBucket Logo on the top left of the navigation bar.
 
 
 
