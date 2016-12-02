@@ -84,7 +84,7 @@ func main() {
 	m.Get("/link", func(ctx *macaron.Context) { //Handler for /link
 		ctx.Data["Auth"] = UserDetails //Send UserDetails to the Link page to check if user is logged in
 		ctx.Data["Id"] = response // Send the uploaded image id to the FileId template page
-		ctx.HTML(200, "FileId") //Load the FileId template
+		ctx.HTML(200, "fileId") //Load the FileId template
 	})
 
 	//Get for the search page
