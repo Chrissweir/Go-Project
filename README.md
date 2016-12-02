@@ -44,6 +44,14 @@ go build webapp.go
 For IntelliJ IDEA:
 
 Open the project through the file browser then build and run webapp.go.
+
+**Open a web browser and go to:**
+
+Make sure port 8080 is not used by any other application.
+```
+localhost:8080
+```
+
 Browse and upload an image, register and sign in!
 
 To return to the image upload page simply click the ImageBucket Logo on the top left of the navigation bar.
