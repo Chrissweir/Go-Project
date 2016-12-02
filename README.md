@@ -48,6 +48,12 @@ Browse and upload an image, register and sign in!
 
 To return to the image upload page simply click the ImageBucket Logo on the top left of the navigation bar.
 
+**Sample User**
+
+We have set up a sample user for use with ImageBucket, try to login with these details:
+Email: ian@gmit.ie
+Password: password
+
 
 #### References
 https://www.tutorialspoint.com/mongodb/mongodb_gridfs.htm - Tutorial on GridFS
