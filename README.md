@@ -51,8 +51,9 @@ To return to the image upload page simply click the ImageBucket Logo on the top 
 **Sample User**
 
 We have set up a sample user for use with ImageBucket, try to login with these details:
-Email: ian@gmit.ie
-Password: password
+
+- Email: ian@gmit.ie
+- Password: password
 
 
 #### References
